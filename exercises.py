@@ -30,8 +30,10 @@ def is_english_vowel(c):
     Returns True if c is an english vowel
     and False otherwise.
     """
-    return None
-
+    if c in ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y']:
+        return True
+    else:
+        return False
 
 def test_is_english_vowel():
     assert is_english_vowel('a')
@@ -57,7 +59,11 @@ def count_num_vowels(s):
     """
     Returns the number of vowels in a string s.
     """
-    return None
+    counter = 0
+    for letter in s:
+        if letter in ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y']:
+            counter += 1
+    return counter
 
 
 def test_count_num_vowels():
