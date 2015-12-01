@@ -85,7 +85,13 @@ def histogram(l):
     """
     Converts a list of integers into a simple string histogram.
     """
-    return None
+    s = []
+    for el in l:
+        m = el * '#'
+        s.append(m)
+        s.append('\n')
+    s = ''.join(s[0:-1])
+    return s
 
 
 def test_histogram():
@@ -99,8 +105,10 @@ def get_word_lengths(s):
     Returns a list of integers representing
     the word lengths in string s.
     """
-    return None
-
+    l = []
+    for word in s.split():
+        l.append(len(word))
+    return l
 
 def test_get_word_lengths():
     text = "Three tomatoes are walking down the street"
@@ -114,15 +122,20 @@ def find_longest_word(s):
     Returns the longest word in string s.
     In case there are several, return the first.
     """
-    return None
-
+    max_length = 0
+    word_with_max_length = ''
+    for word in s.split():
+        if len(word) > max_length:
+            max_length = len(word)
+            word_with_max_length = word
+    return word_with_max_length
 
 def test_find_longest_word():
     text = "Three tomatoes are walking down the street"
     assert find_longest_word(text) == "tomatoes"
     text = "foo foo1 foo2 foo3"
     assert find_longest_word(text) == "foo1"
-
+    
 
 # ------------------------------------------------------------------------------
 
@@ -131,7 +144,16 @@ def validate_dna(s):
     Return True if the DNA string only contains characters
     a, c, t, or g (lower or uppercase). False otherwise.
     """
-    return None
+    list_text = list(s)
+    
+    validate = False
+    for el in list_text:
+        if el in ['a', 'c', 'g', 't', 'A', 'C', 'G', 'T']:
+            validate = True
+        else:
+            validate = False
+            break
+    return validate
 
 
 def test_validate_dna():
@@ -147,8 +169,20 @@ def base_pair(c):
     of the base pair. If the base is not recognized,
     return 'unknown'.
     """
-    return None
-
+    base_dict = {}
+    base_dict['A'] = 't'
+    base_dict['C'] = 'g'
+    base_dict['G'] = 'c'
+    base_dict['T'] = 'a'
+    base_dict['a'] = 't'
+    base_dict['c'] = 'g'
+    base_dict['g'] = 'c'
+    base_dict['t'] = 'a'
+    
+    try: 
+        return base_dict[c]
+    except KeyError:
+        return 'unknown'
 
 def test_base_pair():
     assert base_pair('a') == 't'
@@ -170,7 +204,22 @@ def transcribe_dna_to_rna(s):
     Return string s with each letter T replaced by U.
     Result is always uppercase.
     """
-    return None
+    list_dna = list(s)
+    base_dict_rna = {}
+    base_dict_rna['T'] = 'U'
+    base_dict_rna['a'] = 'A'
+    base_dict_rna['c'] = 'C'
+    base_dict_rna['g'] = 'G'
+    base_dict_rna['t'] = 'U'
+    
+    rna = []
+    for el in s:
+        try: 
+            rna.append(base_dict_rna[el])
+        except KeyError:
+            rna.append(el)
+    a = ''.join(rna)
+    return a
 
 
 def test_transcribe_dna_to_rna():
@@ -185,7 +234,23 @@ def get_complement(s):
     Return the DNA complement in uppercase
     (A -> T, T-> A, C -> G, G-> C).
     """
-    return None
+    base_dict2 = {}
+    base_dict2['A'] = 'T'
+    base_dict2['C'] = 'G'
+    base_dict2['G'] = 'C'
+    base_dict2['T'] = 'A'
+    base_dict2['a'] = 'T'
+    base_dict2['c'] = 'G'
+    base_dict2['g'] = 'C'
+    base_dict2['t'] = 'A'
+
+    compl = []
+    
+    for el in s:
+        compl.append(base_dict2[el])
+    
+    a = ''.join(compl)
+    return a
 
 
 def test_get_complement():
@@ -200,7 +265,8 @@ def get_reverse_complement(s):
     Return the reverse complement of string s
     (complement reversed in order).
     """
-    return None
+    a = get_complement(s)
+    return a[::-1]
 
 
 def test_get_reverse_complement():
@@ -214,6 +280,7 @@ def remove_substring(substring, string):
     """
     Returns string with all occurrences of substring removed.
     """
+    
     return None
 
 
